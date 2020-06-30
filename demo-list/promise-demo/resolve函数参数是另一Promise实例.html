@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>resolve函数参数是另一Promise实例</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <script>
+      const p1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log('p1...');
+          setTimeout(() => {
+            return reject(new Error('fail...'));
+          }, 1000);
+        }, 2000);
+      });
+
+      const p2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log('p2...');
+          return resolve(p1);
+        }, 1000);
+      });
+
+      p2.then(
+        res => {
+          //resolved
+          console.log(res);
+        },
+        err => {
+          //rejected
+          console.log('rejected err :>> ', err);
+        }
+      ).catch(err => {
+        //catch error
+        console.log('catch err :>> ', err);
+      });
+    </script>
+  </body>
+</html>

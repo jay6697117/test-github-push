@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Object.create方法生成对象</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      var obj1 = Object.create(
+        {},
+        {
+          p1: {
+            value: 123,
+            enumerable: true,
+            configurable: true,
+            writable: true
+          },
+          p2: {
+            value: 'abc',
+            enumerable: true,
+            configurable: true,
+            writable: true
+          }
+        }
+      );
+      console.log('obj1 :>> ', obj1);
+
+      //等同于
+
+      var obj2 = Object.create({});
+      obj2.p1 = 123;
+      obj2.p2 = 'abc';
+      console.log('obj2 :>> ', obj2);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>writable</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <script src="../lib/jquery.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      'use strict';
+      var proto = Object.defineProperty({}, 'p', {
+        value: 111,
+        writable: false
+      });
+
+      console.log(
+        'Object.getOwnPropertyDescriptors(proto) :>> ',
+        Object.getOwnPropertyDescriptors(proto)
+      );
+
+      console.log('----------------------');
+
+      var son = Object.create(proto);
+      console.log(
+        'Object.getOwnPropertyDescriptors(son) :>> ',
+        Object.getOwnPropertyDescriptors(son)
+      );
+
+      console.log('----------------------');
+
+      Object.defineProperty(son, 'p', { value: 222, writable: true });
+      console.log(
+        'Object.getOwnPropertyDescriptors(son) :>> ',
+        Object.getOwnPropertyDescriptors(son)
+      );
+
+      console.log('----------------------');
+
+      son.p = 333;
+      console.log(
+        'Object.getOwnPropertyDescriptors(son) :>> ',
+        Object.getOwnPropertyDescriptors(son)
+      );
+    </script>
+  </body>
+</html>

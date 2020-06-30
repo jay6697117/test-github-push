@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Promise对象实现Ajax</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <script>
+      // const url = 'http://127.0.0.1:3000/static/test.json';
+      const url = 'http://127.0.0.1:3000/static/api.php';
+
+      getJson(url).then(
+        res => {
+          console.log('res :>> ', res);
+        },
+        err => {
+          console.error('err :>> ', err);
+        }
+      );
+
+      function getJson (url) {
+        return new Promise(function (resolve, reject) {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.setRequestHeader('Accept', 'application/json');
+          xhr.responseType = 'json';
+          xhr.send(null);
+
+          xhr.onreadystatechange = function handleStateChange () {
+            if (xhr.readyState === 4) {
+              // 通信成功时，状态值为4
+              if (xhr.status === 200) {
+                console.log('xhr :>> ', xhr);
+                resolve(xhr.response);
+              } else {
+                reject(new Error('onreadystatechange: ' + xhr.statusText));
+              }
+            } else {
+              // 排除通信失败
+              return;
+            }
+          };
+
+          xhr.onerror = function handleError (e) {
+            reject(new Error('onerror: ' + xhr.statusText));
+          };
+        });
+      }
+    </script>
+  </body>
+</html>

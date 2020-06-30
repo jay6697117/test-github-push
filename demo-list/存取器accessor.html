@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>存取器accessor</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <script src="../lib/jquery.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      var obj = {
+        _num: 5,
+        get next() {
+          return (this._num += 1);
+        },
+        set next(val) {
+          if (val >= this._num) {
+            this._num = val;
+          } else {
+            throw new Error('新的值必须大于当前值');
+          }
+        }
+      };
+      console.log(
+        '000 Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+      obj.next;
+      console.log('000 obj._num:>> ', obj._num);
+      console.log(
+        '000 Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+      console.log('------------------------------------');
+
+      console.log(
+        '001 Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+      obj.next;
+      console.log('001 obj._num:>> ', obj._num);
+      console.log(
+        '001 Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+
+      console.log('------------------------------------');
+
+      obj.next = 7;
+      console.log(
+        '002 Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+    </script>
+  </body>
+</html>

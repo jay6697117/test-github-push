@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>对象的拷贝</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <script src="lib/jquery.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      var obj1 = { a: 1, b: 2 };
+      var obj2 = { c: 3, d: 4 };
+
+      //ES2017之前
+      function copyObject1(ooriginObj) {
+        var copy = Object.create(Object.getPrototypeOf(ooriginObj));
+        copyOwnPropertiesFrom(copy, ooriginObj);
+        return copy;
+      }
+
+      function copyOwnPropertiesFrom(target, source) {
+        Object.getOwnPropertyNames(source).forEach(function (propKey) {
+          var desc = Object.getOwnPropertyDescriptor(source, propKey);
+          Object.defineProperty(target, propKey, desc);
+        });
+      }
+
+      // ES2017之后
+      function copyObject2(ooriginObj) {
+        return Object.create(
+          Object.getPrototypeOf(ooriginObj),
+          Object.getOwnPropertyDescriptors(ooriginObj)
+        );
+      }
+
+      console.log('copyObject1(obj1) :>> ', copyObject1(obj1));
+      console.log('copyObject2(obj2) :>> ', copyObject2(obj2));
+    </script>
+  </body>
+</html>

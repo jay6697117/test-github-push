@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>demo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Shape类
+      function Shape() {
+        this.x = 0;
+        this.y = 0;
+      }
+      Shape.prototype.move = function (xDis, yDis) {
+        this.x += xDis;
+        this.y += yDis;
+        console.log('Shape moved.');
+      };
+
+      //Shape实例对象
+      var s = new Shape();
+
+      // Rectangle类
+      function Rectangle() {
+        Shape.call(this);
+        this.type = '长方形';
+      }
+
+      // 整体继承父类
+      Rectangle.prototype = Object.create(Shape.prototype);
+      Rectangle.prototype.constructor = Rectangle;
+      // 单个方法的继承
+      // Rectangle.prototype.moveR = function () {
+      //     Shape.prototype.move.call(this);
+      //     console.log('this.moveR :>> ', this.moveR);
+      // };
+
+      //Rectangle实例对象
+      var r = new Rectangle();
+
+      console.log('s instanceof Shape :>> ', s instanceof Shape); //true
+      console.log('s instanceof Rectangle :>> ', s instanceof Rectangle); //false
+      console.log('r instanceof Shape :>> ', r instanceof Shape); //true
+      console.log('r instanceof Rectangle :>> ', r instanceof Rectangle); //true
+    </script>
+  </body>
+</html>

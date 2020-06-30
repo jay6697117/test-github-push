@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>demo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      /************ 定义父类Father *************/
+      // 父类构造函数
+      function Father(nameParam) {
+        this.name = nameParam;
+        this.age = 55;
+        this.hairColor = 'black';
+      }
+      // 父类Father原型对象
+      Father.prototype.eat = function () {
+        console.log('Father.prototype.eat');
+      };
+
+      /************ 定义子类Son *************/
+      // 子类构造函数
+      function Son(nameParam) {
+        Father.call(this);
+        //定义子类属性覆盖继承的父类属性name+age
+        this.name = nameParam;
+        this.age = 21;
+      }
+      // 子类Son原型对象
+      Son.prototype = Object.create(Father.prototype);
+      Son.prototype.constructor = Son;
+      Son.prototype.drink = function () {
+        console.log('Son.prototype.drink');
+      };
+
+      /* 实例 */
+      var f = new Father('爸爸');
+      var s = new Son('儿子');
+    </script>
+  </body>
+</html>

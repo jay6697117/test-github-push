@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>configurable</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <script src="../lib/jquery.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      // 'use strict';
+      const obj = Object.defineProperties(
+        {},
+        {
+          p1: {
+            value: 111,
+            enumerable: false,
+            configurable: true,
+            writable: false
+          },
+          p2: {
+            value: 222,
+            enumerable: false,
+            configurable: false,
+            writable: false
+          }
+        }
+      );
+      console.log(
+        'Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+
+      delete obj.p1;
+      delete obj.p2;
+
+      console.log(
+        'Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+      console.log('obj.p1 :>> ', obj.p1);
+      console.log('obj.p2 :>> ', obj.p2);
+    </script>
+  </body>
+</html>

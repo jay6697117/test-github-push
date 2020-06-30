@@ -1,0 +1,26 @@
+{
+  // 配置eslint
+  //autoFixOnSave
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.validate": [
+    "html",
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "html",
+      "autoFix": true
+    },
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  "eslint.options": {
+    "plugins": ["html", "vue", "react"],
+    "configFile": "./.eslintrc.js"
+  },
+  "eslint.enable": true
+}

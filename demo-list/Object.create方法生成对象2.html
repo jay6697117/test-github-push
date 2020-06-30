@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Object.create方法生成对象</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      function Foo() {}
+      var obj1 = new Foo();
+      var obj2 = Object.create(obj1);
+
+      // 上面代码中, obj2对象的原型是obj1对象, 因此继承了obj1对象的构造函数Foo
+      console.log('obj2.constructor === Foo :>> ', obj2.constructor === Foo);
+      console.log('obj1 instanceof Foo:>> ', obj1 instanceof Foo);
+      console.log('obj2 instanceof Foo:>> ', obj2 instanceof Foo);
+    </script>
+  </body>
+</html>

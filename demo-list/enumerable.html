@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>enumerable</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <script src="../lib/jquery.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      const proto = { p3: 333, p4: 444 };
+      const obj = Object.create(proto);
+      obj.p1 = 111;
+      obj.p2 = 222;
+
+      console.log('obj :>> ', obj);
+      console.log(
+        'Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+
+      console.log('-------------------------');
+
+      console.log('obj :>> ', obj);
+      Object.defineProperties(obj, {
+        p1: { enumerable: true },
+        p2: { enumerable: false }
+      });
+      console.log(
+        'Object.getOwnPropertyDescriptors(obj) :>> ',
+        Object.getOwnPropertyDescriptors(obj)
+      );
+
+      console.log('-------------------------');
+
+      console.log('Object.keys(obj) :>> ', Object.keys(obj));
+
+      console.log('-------------------------');
+
+      for (const key in obj) {
+        const element = obj[key];
+        console.log('key :>> ', key);
+        console.log('element :>> ', element);
+        if (obj.hasOwnProperty(key)) {
+          console.log('执行了hasOwnProperty');
+          const element = obj[key];
+          console.log('hasOwnProperty key :>> ', key);
+          console.log('hasOwnProperty element :>> ', element);
+          console.log('结束了hasOwnProperty');
+        }
+      }
+
+      console.log('-------------------------');
+      console.log(
+        'Object.getOwnPropertyNames(obj) :>> ',
+        Object.getOwnPropertyNames(obj)
+      );
+
+      console.log('-------------------------');
+      console.log('JSON.stringify(obj) :>> ', JSON.stringify(obj));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>demo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      (function ($, window, document) {
+        function go(num) {
+          console.log('function go');
+        }
+
+        function handleEvents() {
+          console.log('function handleEvents');
+        }
+
+        function initialize() {
+          console.log('function initialize');
+        }
+
+        function dieCarousel() {
+          console.log('function dieCarouselDie');
+        }
+
+        //attach to the global scope
+        // finalCarousel对象输出到全局，对外暴露init和destroy接口
+        window.finalCarousel = {
+          init: initialize,
+          destroy: dieCarousel
+        };
+      })(jQuery, window, document);
+
+      var init = window.finalCarousel.init;
+      var destroy = window.finalCarousel.destroy;
+      console.log('init :>> ', init);
+      console.log('destroy :>> ', destroy);
+    </script>
+  </body>
+</html>
