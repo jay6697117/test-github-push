@@ -1,0 +1,33 @@
+const random1 = Math.random() * 1000;
+const random2 = Math.random() * 1000;
+let initNum = 0;
+
+function f1 (callback) {
+  setTimeout(() => {
+    console.log('-----------------------------');
+    console.log('initNum :>> ', initNum);
+    console.log('我是f1');
+    callback(initNum);
+    initNum += 1;
+  }, random1);
+}
+
+function f2 (num) {
+  setTimeout(() => {
+    console.log('我是f2');
+    if (num) {
+      console.log('num :>> ', num);
+      console.log('lalala');
+    }
+  }, random2);
+}
+
+const foo = f1.bind(null, f2);//闭包
+
+foo();
+setTimeout(() => {
+  foo();
+}, 2000);
+setTimeout(() => {
+  foo();
+}, 4000);
