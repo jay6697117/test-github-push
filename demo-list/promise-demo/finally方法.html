@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>finally方法</title>
+  </head>
+
+  <body>
+    <script>
+      // 1-5 error  |  6-10 success
+      const random1 = Math.floor(Math.random() * 10 + 1);
+      const promise = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          console.log('random1 :>> ', random1);
+          if (random1 > 5) {
+            resolve('go success');
+          } else {
+            reject(new Error('error happened'));
+          }
+        }, 1000);
+      });
+
+      promise
+        .then(res => {
+          //success
+          console.log('success :>> ', res);
+        })
+        .catch(err => {
+          //error
+          console.log('catch :>> ', err);
+        })
+        .finally(function () {
+          //final
+          console.log('final :>> go finally');
+        });
+
+      // finally等同于下面的then
+      // promise.then(
+      //   result => {
+      //     // 语句
+      //     console.log('result :>> ', result);
+      //   },
+      //   error => {
+      //     // 语句
+      //     console.log('error :>> ', error);
+      //     // throw error;
+      //   }
+      // );
+
+      //finally实现原理
+      // Promise.prototype.finally = function (callback) {
+      //   let P = this.constructor;
+      //   return this.then(
+      //     value => P.resolve(callback()).then(() => value),
+      //     reason =>
+      //       P.resolve(callback()).then(() => {
+      //         throw reason;
+      //       })
+      //   );
+      // };
+    </script>
+  </body>
+</html>

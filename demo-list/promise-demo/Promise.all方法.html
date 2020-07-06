@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise.all方法</title>
+  </head>
+
+  <body>
+    <script>
+      const p1 = new Promise((resolve, reject) => {
+        resolve('It is ok.');
+      })
+        .then(result1 => result1)
+        .catch(err1 => err1);
+
+      const p2 = new Promise((resolve, reject) => {
+        throw new Error('报错了');
+      })
+        .then(result2 => result2)
+        .catch(err2 => err2);
+
+      Promise.all([p1, p2])
+        .then(result => {
+          console.log('result :>> ', result);
+        })
+        .catch(err => {
+          console.log('err :>> ', err);
+        });
+    </script>
+  </body>
+</html>

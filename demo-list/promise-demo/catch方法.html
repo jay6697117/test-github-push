@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>catch方法</title>
+  </head>
+
+  <body>
+    <script>
+      //catch方法
+      const someAsyncThing = function () {
+        return new Promise(function (resolve, reject) {
+          // 下面一行会报错，因为x没有声明
+          // resolve(x + 1); //resolve(undefined)
+          resolve(1 + 1); //resolve(undefined)
+        });
+      };
+
+      const someOtherAsyncThing = function () {
+        return new Promise(function (resolve, reject) {
+          // 下面一行会报错，因为y没有声明
+          // resolve(y + 2); //resolve(undefined)
+          resolve(2 + 2); //resolve(undefined)
+        });
+      };
+
+      someAsyncThing()
+        .then(res1 => {
+          console.log('res1 :>> ', res1);
+          return someOtherAsyncThing();
+        })
+        .then(res2 => {
+          console.log('res2 :>> ', res2);
+          w + 4;
+        })
+        .catch(err1 => {
+          console.log('err1 :>> ', err1);
+          // 下面一行会报错，因为 z 没有声明
+          z + 3;
+        })
+        .then(res => {
+          console.log('carry on');
+        })
+        .catch(err2 => {
+          console.log('err2 :>> ', err2);
+        });
+      // ReferenceError: y is not defined
+      // ReferenceError: z is not defined
+    </script>
+  </body>
+</html>

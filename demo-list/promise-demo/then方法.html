@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // getJSON('./static/test.json')
+      //   .then(post => {
+      //     console.log('resolved 1.0 :>> ', post);
+      //     return getJSON(post.b);
+      //   })
+      //   .then(
+      //     res => { console.log('resolved 1.1 :>>  ', res); },
+      //     err => { console.log('rejected 1.1 :>>  ', err); }
+      //   );
+
+      // getJSON('./static/test.json')
+      //   .then(post => {
+      //     console.log('resolved 2.0 :>> ', post);
+      //     return getJSON(post.b);
+      //   })
+      //   .then(res => {
+      //     console.log('resolved 2.1 :>>  ', res);
+      //   })
+      //   .then(null, err => {
+      //     console.log('rejected 2.1 :>>  ', err);
+      //   });
+
+      getJSON('./static/test.json')
+        .then(post => {
+          console.log('resolved 3.0 :>> ', post);
+          return getJSON(post.b);
+        })
+        .then(res => {
+          console.log('resolved 3.1 : ', res);
+        })
+        .catch(err => {
+          console.log('rejected 3.1 : ', err);
+        });
+
+      function getJSON (url) {
+        return new Promise(function (resolve, reject) {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.setRequestHeader('Accept', 'application/json');
+          xhr.responseType = 'json';
+          xhr.send(null);
+
+          xhr.onreadystatechange = function handleStateChange () {
+            if (xhr.readyState === 4) {
+              // 通信成功时，状态值为4
+              if (xhr.status === 200) {
+                console.log('xhr :>> ', xhr);
+                resolve(xhr.response);
+              } else {
+                reject(new Error('onreadystatechange: ' + xhr.statusText));
+              }
+            } else {
+              // 排除通信失败
+              return;
+            }
+          };
+
+          xhr.onerror = function handleError (e) {
+            reject(new Error('onerror: ' + xhr.statusText));
+          };
+        });
+      }
+    </script>
+  </body>
+</html>
