@@ -8,6 +8,28 @@
   </head>
   <body>
     <script>
+      /* eslint-disable */
+      const obj1 = {
+        a: 1,
+        b: 2,
+        c: 3
+      };
+      obj1.__proto__.foo = function () {
+        console.log('foo');
+      };
+      const obj2 = { ...obj1 };
+
+      console.log('001 obj1 :>> ', obj1);
+      console.log('001 obj2 :>> ', obj2);
+
+      obj1.a = 4;
+      obj1.b = 5;
+      obj1.c = 6;
+      obj2.a = 7;
+      obj2.b = 8;
+      obj2.c = 9;
+      console.log('002 obj1 :>> ', obj1);
+      console.log('002 obj2 :>> ', obj2);
     </script>
   </body>
 </html>

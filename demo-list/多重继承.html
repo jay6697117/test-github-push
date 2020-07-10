@@ -9,7 +9,7 @@
   <body>
     <script type="text/javascript">
       //F1类
-      function F1() {
+      function F1 () {
         this.a = 1;
       }
       //F1类实例原型对象
@@ -18,7 +18,7 @@
       };
 
       //F2类
-      function F2() {
+      function F2 () {
         this.b = 2;
       }
       //F2类实例原型对象
@@ -26,7 +26,7 @@
         console.log('我是methodF2...');
       };
 
-      function S() {
+      function S () {
         F1.call(this);
         F2.call(this);
         this.c = 3;

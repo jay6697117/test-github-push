@@ -3,6 +3,7 @@
  * @param { number } wait 延迟执行毫秒数
  * @param { boolean } immediate  true 表立即执行，false 表非立即执行
  */
+
 function debounce (func, wait, immediate) {
   console.log('debounce正在执行, 请等待三秒');
   let timeout;

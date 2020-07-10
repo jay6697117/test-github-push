@@ -12,10 +12,10 @@
     <script type="text/javascript">
       var obj = {
         _num: 5,
-        get next() {
+        get next () {
           return (this._num += 1);
         },
-        set next(val) {
+        set next (val) {
           if (val >= this._num) {
             this._num = val;
           } else {
