@@ -1,6 +1,8 @@
 const random1 = Math.random() * 1000;
 const random2 = Math.random() * 1000;
 let initNum = 0;
+console.log('random1 :>> ', random1);
+console.log('random2 :>> ', random2);
 
 function f1 (callback) {
   setTimeout(() => {

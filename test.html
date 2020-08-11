@@ -3,26 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>同步任务-微任务-正常异步任务</title>
+    <title>Document</title>
   </head>
 
   <body>
     <script>
-      // 正常异步任务: 追加到下一轮事件循环
-      setTimeout(function () {
-        console.log(1);
-      }, 0);
+      const random1 = Math.random() * 1000;
+      const random2 = Math.random() * 1000;
+      let initNum = 0;
+      console.log('random1 :>> ', random1);
+      console.log('random2 :>> ', random2);
 
-      // 微任务(非正常异步任务): 追加到本轮事件循环一定晚于同步任务
-      new Promise(function (resolve, reject) {
-        resolve(2);
-      }).then(console.log);
+      function f1 (callback) {
+        setTimeout(() => {
+          console.log('-----------------------------');
+          console.log('initNum :>> ', initNum);
+          console.log('我是f1');
+          callback(initNum);
+          initNum += 1;
+        }, random1);
+      }
 
-      //同步任务: 在本轮事件循环中一定早于异步任务
-      console.log(3);
-      // 3
-      // 2
-      // 1
+      function f2 (num) {
+        setTimeout(() => {
+          console.log('我是f2');
+          if (num) {
+            console.log('num :>> ', num);
+            console.log('lalala');
+          }
+        }, random2);
+      }
+
+      const foo = f1.bind(null, f2); //闭包
+
+      foo();
+      setTimeout(() => {
+        foo();
+      }, 2000);
+      setTimeout(() => {
+        foo();
+      }, 4000);
     </script>
   </body>
 </html>
